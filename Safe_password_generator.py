@@ -1,6 +1,4 @@
-from random import randint
-
-randint(1, 100)
+import random
 
 digits = '0123456789'
 lowercase_letters = 'abcdefghijklmnopqrstuvwxyz'
@@ -9,8 +7,8 @@ punctuation = '!#$%&*+-=?@^_'
 
 chars = ''
 
-quantity = input('Введите желаемое количество паролей для генерации?')
-length = input('Укажите длину одного пароля?')
+quantity = int(input('Введите желаемое количество паролей для генерации?'))
+length = int(input('Укажите длину одного пароля?'))
 num_ok = input('Включать ли цифры? да/нет')
 char_up = input('Включать ли прописные буквы? да/нет')
 char_low = input('Включать ли строчные буквы? да/нет')
@@ -25,19 +23,17 @@ if char_low.lower() == 'да':
     chars += lowercase_letters
 if symbol.lower() == 'да':
     chars += punctuation
-
-print(chars)
-
-
-
-'''
-Количество паролей для генерации;
-Длину одного пароля;
-Включать ли цифры 0123456789?
-Включать ли прописные буквы ABCDEFGHIJKLMNOPQRSTUVWXYZ?
-Включать ли строчные буквы abcdefghijklmnopqrstuvwxyz?
-Включать ли символы !#$%&*+-=?@^_?
-Исключать ли неоднозначные символы il1Lo0O?
-'''
+if similar_sym.lower() == 'да':
+    for c in 'il1Lo0O':
+        chars = chars.replace(c, '')
 
 
+def generate_password(length, chars):
+    password = ''
+    for i in range(length):
+        password += random.choice(chars)
+    return password
+
+
+for _ in range(quantity):
+    print(generate_password(length, chars))
